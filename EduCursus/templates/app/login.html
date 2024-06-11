@@ -1,0 +1,44 @@
+{% extends "base1.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5 mb-5 shadow">
+        <div class="col-lg-6 shadow p-4">
+                <div class="texte text-center mt-2">
+                    {% for message in messages %}
+                    <strong style="color: green;">
+                        {{ message }}
+                    </strong>
+                    {% endfor %}
+                </div>
+
+                    <h4 class="text-center">Se connecter</h4>
+
+                    <form method="POST" action="{% url 'login' %}">
+                        {% csrf_token %} <!--Protection/sécurité du formulaire-->
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Entrez votre nom d'utilisateur" required> 
+                        <br> <!--break (à la ligne)-->   <!--required (tant que ce champs n'est pas rempli, l'utilisateur ne pourra pas soumettre le formulaire)-->
+                        
+                        <label for="password">Mot de passe</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Entrez votre mot de passe" required>
+                        <span class="fa fa-unlock"></span>
+                        <br> <!--break-->
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Connecter</button>
+                        </div>
+                    </form>
+              <p class="link text-center mt-3">Pas encore inscrit ? <a href="{% url 'register' %}">S'inscrire</a></p>
+            
+        </div>
+        <div class="col-lg-6">
+            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/3689226-inscription-en-ligne-ou-inscrip
+            tion-connexion-pour-compte-sur-smartphone-app-user-interface-with-secure-password-mobile-applicati
+            on-for-ui-web-banner-access-cartoon-people-illustrationle-vectoriel.jpg" 
+            alt="" class="img-fluid img-reponsive">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

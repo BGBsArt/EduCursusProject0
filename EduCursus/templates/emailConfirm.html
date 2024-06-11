@@ -1,0 +1,9 @@
+{% autoescape off %}
+Bienvenu sur EduCursus !
+
+Salut {{ name }} !
+Confirmez votre adresse email en cliquant sur le lien suivant :
+
+Lien : http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}

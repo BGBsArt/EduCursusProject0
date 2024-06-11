@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+      {% for message in messages %}
+          <strong style="color: red;">
+              {{ message }}
+          </strong>
+      {% endfor %}
+      
+      
+
+<section id="imagePrincipale">
+  <div>
+    <style>
+      #imagePrincipale {
+        padding-top: 60px;
+        background: url(https://lh5.googleusercontent.com/proxy/Je9WFN4aiyIdvE9vchEtI-etEJFc0nlTFoo3t2IGAHz-3-l9cMZiMdM8iTG0Um-s8W7jK7b7GjE1meX_5EbLq6t7PJgi4d4k0hhite4t3ybQlG4JknbBKi_Pe2vxNh1ViMQZ4Bei) no-repeat fixed 50% 50%;
+      /*  filter: brightness(50%); */
+        background-size: cover;
+        height: 500px;
+      }
+
+      h1 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 5em;
+        color: antiquewhite;
+        text-align: center;
+        /* margin-top: 50px;*/
+        text-shadow: 1px 2px 3px black;
+      }
+
+      #trait1 {
+        height: 1px;
+        width: 15%;
+        background-color: antiquewhite;
+        margin: -3px auto;
+        box-shadow: 1px 1px 3px black;
+        padding: 0%;
+      }
+
+      #petittexte {
+        font-size: 1.5em;
+        text-align: center;
+        color: /* antiquewhite ;*/ #95ff93;
+        text-shadow : 1px 1px 3px black;
+        text-transform: uppercase;
+      }
+    </style>
+
+      {% if user.is_authenticated %}
+          <h4  style="text-align: center; color: white;">
+            <strong class="bienvenu bg-light bg-dark shadow">Salut {{ firstname }}, bienvenu sur</strong></h4>    
+      {% endif %}
+
+      <h1><strong>EduCursus</strong></h1>
+      <div id="trait1" class="trait0 mt-1 mb-3"></div>
+      <h3 id="petittexte">L'Education en marche</h3>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="text-center p-4">
+        <div class="texte text-center mt-2">
+          {% for message in messages %}
+          <strong style="color: red;">
+              {{ message }}
+          </strong>
+          {% endfor %}
+        </div>
+
+          <h2 class=" visit mb-4 " style="text-transform:  uppercase; text-align: center; padding-top: 30px;
+          font-size: 1.5em;">Rechercher un étudiant et un seul</h2>
+          <p class="alert alert-info">IMPORTANT : Renseignez minutieusement le nom et le ou les prénoms exacts tels sur l'acte de naissance.</p>
+
+          <div class="row" style="margin: 0 auto;">
+              <form class="form-inline ml-5" action="{% url 'search' %}" >
+                  <input class="form-control mr-sm-2" type="text" placeholder="Nom" name="nom" required>
+            
+                  <input class="form-control mr-sm-2" type="text" placeholder="Prénoms" name="prenom" required>
+            
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                </form>
+          </div>
+    </div>
+  </div>
+</section>
+
+<div class="container mt-3 mb-5">
+    <h2 class=" visit mb-4 " style="text-transform:  uppercase; text-align: center; padding-top: 30px;
+    font-size: 1.5em;">Visitez les universités du Bénin</h2>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card shadow" style="width: 18rem;">
+                <img src="https://cappfm.com/wp-content/uploads/2023/05/images-11.jpeg" class="card-img-top" alt="Image UAC">
+                <div class="card-body">
+                  <h5 class="card-title">UAC</h5>
+                  <p class="card-text">L'université d'Abomey-Calavi (UAC) est une université publique béninoise 
+                    située dans la commune d'Abomey-Calavi, près de Cotonou, dans le sud du pays.</p>
+                  <a href="https://uac.bj/" class="btn btn-warning">Visitez l'UAC</a>
+                </div>
+              </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow" style="width: 18rem;">
+                <img src="https://static.dw.com/image/59840166_906.jpeg" class="card-img-top" alt="Image UP">
+                <div class="card-body">
+                  <h5 class="card-title">UP</h5>
+                  <p class="card-text">L'Université de Parakou est la deuxième université d'État béninois.
+                     Elle a été créée en 2001 par le décret N° 2001-365 du 18 Septembre de la même année.</p>
+                  <a href="https://campusjeunes.net/sc/annuaire/universite/universite-de-parakou-up" class="btn btn-warning">Visitez l'UP</a>
+                </div>
+              </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow" style="width: 18rem;">
+                <img src="https://24haubenin.info/local/cache-vignettes/L550xH308/una_ketou-60de8.jpg?1713153793" class="card-img-top" alt="Image UNA">
+                <div class="card-body">
+                  <h5 class="card-title">UNA</h5>
+                  <p class="card-text">L'université nationale d'agriculture (UNA) est une université publique 
+                    béninoise. Elle est créée en 2016 à la suite du décret n°2016-638 du 13 octobre 2016.</p>
+                  <a href="https://www.oreilleducampus.org/universite-agriculture-ketou.html" class="btn btn-warning">Visitez l'UNA</a>
+                </div>
+              </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

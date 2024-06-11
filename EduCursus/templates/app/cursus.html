@@ -1,0 +1,94 @@
+{% extends "baseAdmin.html" %}
+
+{% block content %}
+
+<div style="background-color: antiquewhite;">
+    <div class="container">
+        <div class="text-center alert alert-danger">
+            <h2 style="text-transform: uppercase;">Resultats de fin d'année de l'apprenant « {{ apprenant.matricule }} »</h2>
+        </div>
+    
+        <div class="row">
+            <div class="col-sm-4" style="padding: 30px 0px 70px 20px;">
+                    <div class="texte text-center mt-2">
+                        {% for message in messages %}
+                        <strong style="color: green;">
+                            {{ message }}
+                        </strong>
+                        {% endfor %}
+                    </div>
+    
+                    <h4 class="text-center alert alert-info mt-3">RENSEIGNEZ ICI</h4>
+                    <form method="POST" action="">
+                        {% csrf_token %} <!--Protection/sécurité du formulaire-->
+                        <label for="filiereEnCours"><strong>Filière d'année en cours</strong></label>
+                        <input type="text" name="filiereEnCours" id="filiereEnCours" class="form-control" required>
+                        <div class="sousTitre" style="font-size: 15px; color: #2381ff;">
+                            (ex : GIT4-RII/Philsophie-1/4eme/2nd D)
+                        </div>
+                        <br> <!--break-->
+    
+                        <label for="annee"><strong>Année (Scolaire ou Académique)</strong></label>
+                        <input type="text" name="annee" id="annee" class="form-control" required> 
+                        <div class="sousTitre" style="font-size: 15px; color: #2381ff;">
+                            (ex : 2023-2024)
+                        </div>
+                        <br> <!--break (à la ligne)-->   <!--required (tant que ce champs n'est pas rempli, l'utilisateur ne pourra pas soumettre le formulaire)-->
+    
+                        <label for="note"><strong>Moyenne de fin d'année/20</strong></label>
+                        <input type="number" name="note" id="note" class="form-control" step="00.01" required>
+                        <div class="sousTitre" style="font-size: 15px; color: #2381ff;">
+                            (ex : 13.77)
+                        </div>
+                        <br> <!--break-->
+    
+                        <label for="mention"><strong>Mention</strong></label>
+                        <input type="text" name="mention" id="mention" class="form-control" required>
+                        <div class="sousTitre" style="font-size: 15px; color: #2381ff;">
+                            (ex : Assez bien)
+                        </div>
+                        <br> <!--break-->
+                        
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-success" value="Ajouter"> 
+                            <a href="{% url 'adminPage' user.id %}" class="btn btn-info">Retour en arrière</a>                           
+                        </div>
+                    </form>
+            </div>
+                    <div class="container text-center col-sm-8" style="padding: 30px 0px 70px 40px; " > 
+                        <div class=" container">
+                            <h4 class="alert alert-info mt-3">VOICI SON PARCOURS</h4>
+                                {% if apprenant %}
+                                    <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">Filière en cours</th>
+                                        <th scope="col">Annee</th>
+                                        <th scope="col">Moyenne/20</th>
+                                        <th scope="col">Mention</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for studento in apprenant %}
+                                        <tr>
+                                            <td>{{studento.filiereEnCours}}</td>
+                                            <td>{{studento.annee}}</td>
+                                            <td>{{studento.note}}</td>
+                                            <td>{{studento.mention}}</td>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>
+                                {% else %}
+                                    <h4 class="text-center alert alert-warning">Pas d'enregistrement</h4>
+                                {% endif %}  
+                        </div>
+                    </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

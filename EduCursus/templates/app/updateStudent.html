@@ -1,0 +1,44 @@
+{% extends "baseAdmin.html" %}
+
+{% block content %}
+
+<div class="container" style="background-color: antiquewhite;">
+    
+    <div class="row">
+        <div class="col-sm-8 offset-2" style="padding: 0px 100px 100px 100px;">
+            <div class="text-center alert alert-info">
+                <h4>Mettre à jour les données de l'apprenant {{ etablissement.matricule }} </h4>
+            </div>
+            
+            <form method="post" action="">
+                {% csrf_token %} <!--Protection/sécurité du formulaire-->
+                <label for="matricule"><strong>Matricule</strong></label>
+                <input type="text" name="new_matricule" id="matricule" class="form-control" value="{{ student.matricule }}" required> 
+                <h6 style="font-size: 13px;">Il est unique. Ne faites surtout pas erreur de saisi !</h6>
+                
+                <label for="nom"><strong>Nom</strong></label>
+                <input type="text" name="new_nom" id="nom" class="form-control" value="{{ student.nom }}"  required>
+
+                <label for="prenom"><strong>Prénoms</strong></label>
+                <input type="text" name="new_prenom" id="prenom" class="form-control" value="{{ student.prenom }}"  required>
+                <h6 style="font-size: 13px;">Saisir l'intégrlité du prénom de l'apprenant svp.</h6>
+
+                <label for="entite"><strong>Entité/Ecole</strong></label>
+                <input type="text" name="new_entite" id="entite" class="form-control" value="{{ student.entite }}"  required>
+                <h6 style="font-size: 13px;">(ex : EPAC/FASHS/ISM Adonai/CEG Toui)</h6>
+
+                <label for="filiere"><strong>Filière Générale/Classe</strong></label>
+                <input type="text" name="new_filiere" id="filiere" class="form-control" value="{{ student.filiere }}"  required>                
+                <h6 style="font-size: 13px;">(ex : SI/Philsophie/Marketing/4eme/Tle)</h6>
+
+                <div class="text-center">
+                    <input type="submit" class="btn btn-success" value="Modifier">
+                    <a href="{% url 'adminPage' etablissement.id %}" class="btn btn-info">Retour en arrière</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

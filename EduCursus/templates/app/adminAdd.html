@@ -1,0 +1,84 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+<body>
+    <div class="container mt-5 mb-5 shadow">
+            <div class="titre text-center mb-4">
+                <h2>Ajoutez votre Collège et/ou Université !</h2>
+                  <div class="texte text-center mt-2">
+                    {% for message in messages %}
+                    <strong style="color: red;">
+                        {{ message }}
+                    </strong>
+                    {% endfor %}
+                  </div>
+                Remplir les champs
+            </div>
+        
+        <form method="POST" class="row g-3" action="{% url 'adminAdd' %}">
+                {% csrf_token %}
+            <div class="col-md-4">
+              <label for="etablissement" class="form-label">Nom</label>
+              <input type="text" name="etablissement" class="form-control" id="etablissement" placeholder="Collège ou Université" required>
+              <div class="sousTitre" style="font-size: 15px; color: #2381ff;">
+                (ex : CEG1 Godomey)
+              </div>
+            
+            </div>
+            <div class="col-md-4">
+              <label for="codeid" class="form-label">Code d'identification (ID)</label>
+              <input type="number" min="00000000" max="99999999" pattern="[0-9]{8}" name="codeid" class="form-control" id="codeid" placeholder="01234567" required>
+              <div class="sousTitre" style="font-size: 15px; color: #2381ff;">
+                Il doit etre unique !
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="Email" class="form-label">Adresse Email valide</label>
+              <input type="email" name="email" class="form-control" id="Email" placeholder="exemple@gmail.com" required>
+                <div class="sousTitre" style="font-size: 15px; color: #2381ff;">
+                  Entrez l'Email de l'établissement.
+                </div>
+            </div>
+           
+            <div class="col-md-6 mt-3">
+              <label for="city" class="form-label">Arrondissement</label>
+              <input type="text" name="city" class="form-control" id="city" placeholder="Godomey" required>
+              <div class="sousTitre" style="font-size: 15px; color: #2381ff;">
+                Veuillez fournir la ville ou le village valide.
+              </div>
+            </div>
+
+            <div class="col-md-2 mt-3 ml-5">
+              <label for="commune" class="form-label">Commune</label>
+              <select class="form-select form-control" name="commune" id="commune" required>
+                <option selected disabled value="">Choisir...</option>
+                <option>Cotonou</option><option>Abomey-Calavi</option><option>Dassa</option>
+                <option>Savè</option><option>Ouessè</option><option>Tchaourou</option>
+                <option>Parakou</option><option>Natitingou</option><option>Ouidah</option>
+              </select>
+              <div class="sousTitre" style="font-size: 15px; color: #2381ff;">
+                Veuillez sélectionner une commune valide.
+              </div>
+              
+            </div>
+            <div class="col-md-2 mt-3 ml-5">
+              <label for="school" class="form-label">Etablissement</label>
+              <select class="form-select form-control" name="school" id="school" required>
+                <option selected disabled value="">Choisir...</option>
+                <option>Collège/Lycée</option><option>Université</option>
+              </select>
+              <div class="sousTitre mt-2" style="font-size: 15px; color: #2381ff;">
+                Un seul choix
+              </div>
+            </div>
+            
+            <div class="text-center col-md-4 mb-3 mt-3" style="margin: 0px auto;">
+              <button class="btn btn-primary" style="background-color: #2381ff; " type="submit">Soumettre</button>
+            </div>
+          </form>
+    </div>
+</body>
+
+{% endblock %}

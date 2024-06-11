@@ -1,0 +1,45 @@
+{% extends "baseAdconnect.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="text-center alert alert-danger">
+        <h2> ADMINISTRATEUR : {{user.etablissement}}</h2>
+    </div>
+
+    <div class="texte text-center mt-2">
+        {% for message in messages %}
+        <strong style="color: green;">
+            {{ message }}
+        </strong>
+        {% endfor %}
+    </div>
+                <div class="text-center p-4">
+                    <p>Bienvenu à votre page d'Administration, Administrateur de {{user.etablissement}} !</p>
+                </div>
+                     
+               <div class="row">
+                    <div class="col-sm-3">
+                        <div>
+                            <p><strong>Si vous avez une API, ajoutez la</strong></p>
+                            <input type="text" name="api" id="api" class="form-control" required>
+                        </div>
+                    </div>
+
+               </div>
+
+                <div class="text-center p-3" style="margin: 0px auto;">
+                    <p><strong>Sinon, ajoutez vos apprenants</strong></p>
+                    <a href="{% url 'adminPage' user.id %}" class="btn btn-success btn-s">Ajouter les apprenants</a>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="text-center" style="position: absolute; right: 150px;"> <!--Ce div doit etre absolument à droite-->
+                        <p><strong>Voir les apprenants enregistrés</strong></p>
+                        <a href="{% url 'adminPage' user.id %}" class="btn btn-primary btn-s">Voir les apprenants</a>
+                    </div>
+                </div>
+     
+</div> 
+{% endblock %}

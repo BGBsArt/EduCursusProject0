@@ -1,0 +1,96 @@
+{% extends "baseAdmin.html" %}
+
+{% block content %}
+
+<div class="" style="background-color: antiquewhite;">
+    <div class="text-center alert alert-danger">
+        <h2>PAGE ADMINISTRATEUR</h2>
+    </div>
+
+    <p class=" text-center alert alert-info">IMPORTANT : Renseignez minutieusement le nom et le(s) prénoms exacts tels sur l'acte de naissance.</p>
+
+    <div class="row">
+        <div class="col-sm-4" style="padding: 30px 0px 70px 50px; /* haut gauche bas droite*/">
+            <div class="texte text-center mt-2">
+                {% for message in messages %}
+                    <strong style="color: green;">
+                        {{ message }}
+                    </strong>
+                {% endfor %}
+            </div>
+
+            <h4 class="text-center alert alert-info mt-3">Ajouter un nouvel apprenant</h4>
+            
+                <form method="POST" action="">          
+                    {% csrf_token %} <!--Protection/sécurité du formulaire-->
+
+                    <label for="matricule"><strong>Matricule</strong></label>
+                    <input type="text" name="matricule" id="matricule" class="form-control" placeholder="Entrez le numéro matricule de l'apprenant" required> 
+                    <h6 style="font-size: 13px;">Il est unique. Ne faites surtout pas erreur de saisi !</h6>
+                    
+                    <label for="nom"><strong>Nom</strong></label>
+                    <input type="text" name="nom" id="nom" class="form-control" placeholder="Entrez son nom" required>
+
+                    <label for="prenom"><strong>Prénoms</strong></label>
+                    <input type="text" name="prenom" id="prenom" class="form-control" placeholder="Entrez son prénom(s)" required>
+                    <h6 style="font-size: 13px;">Saisir l'intégrlité du prénom de l'apprenant svp.</h6>
+
+                    <label for="entite"><strong>Entité/Ecole</strong></label>
+                    <input type="text" name="entite" id="entite" class="form-control" placeholder="Sous forme de sigle" required>
+                    <h6 style="font-size: 13px;">(ex : EPAC/FASHS/ISM Adonai/CEG Toui)</h6>
+
+                    <label for="filiere"><strong>Filière Générale/Classe</strong></label>
+                    <input type="text" name="filiere" id="filiere" class="form-control" placeholder="Entrez votre mot de passe" required>                
+                    <h6 style="font-size: 13px;">(ex : SI/Philsophie/Marketing/4eme/Tle)</h6>
+
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-success" value="Ajouter">
+                                                    
+                        <a href="{% url 'adminConnecter' user.id %}" class="btn btn-info">Retour en arrière</a>
+                        
+                    </div>
+                </form>
+                
+        </div>
+        <div class="container text-center col-sm-8" style="padding: 30px 0px 70px 40px; " > 
+            <div class=" container">
+                <h4 class="alert alert-info mt-3" style="text-transform: uppercase;">Les apprenants enrégistrés</h4>
+                {% if mesApprenants %}
+                        <table class="table table-striped">
+                        <thead>
+                            <tr>
+                            <th scope="col">Matricule</th>
+                            <th scope="col">Nom et Prénoms</th>
+                            <th scope="col">Entité/Ecole</th>
+                            <th scope="col">Filière</th>
+                            <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stud in mesApprenants %}
+                            <tr>
+                                <td>{{stud.matricule}}</td>
+                                <td>{{stud.nom}} {{stud.prenom}}</td>
+                                <td>{{stud.entite}}</td>
+                                <td>{{stud.filiere}}</td>
+                                <td>
+                                    <a href="{% url 'cursusInform' stud.id %}" class="btn btn-success btn-s">Cursus</a>
+                                    <a href="{% url 'updateData' stud.id %}" class="btn btn-warning btn-s">Modifier</a>
+                                    <!--'updateData' est le 'views' dans 'urls', c'est le chemin de cette methode-->
+                                    <form action="{% url 'delecteStud' stud.id %}" method="POST" class="d-inline">
+                                        {% csrf_token %} <!--'delecteStud' est le 'name' dans 'urls', c'est l'action que nous voudrions faire-->
+                                        <input type="submit" class="btn btn-danger" value="Supprimer">
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                    {% else %}
+                        <h4 class="text-center alert alert-warning">Pas d'enregistrement</h4>
+                    {% endif %}  
+            </div>
+        </div>
+    </div>
+</div> 
+{% endblock %}

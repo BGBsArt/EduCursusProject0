@@ -1,0 +1,56 @@
+{% extends "baseAdmin.html" %}
+
+{% block content %}
+
+
+<section class="p-5 mb-5">
+    <div class="texte text-center mt-2">
+        {% for message in messages %}
+        <strong style="color: green;">
+            {{ message }}
+        </strong>
+        {% endfor %}
+      </div>
+
+    <div class=" container mb-5" style="padding: 0px 0px 150px 0px;">
+        {% if apprenants %}
+        <h4 class="text-center alert alert-info mt-3"><strong style="text-transform: uppercase;">PARCOURS D'ETUDE DE «{{ apprenants.0.nom }} {{ apprenants.0.prenom }}»</strong></h4>
+            
+                <table class="text-center table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Filière/Classe</th>
+                        <th scope="col">Année Académique</th>
+                        <th scope="col">Moyenne/20</th>
+                        <th scope="col">Mention</th>
+                    </tr>
+                </thead>
+                {% for apprenant in apprenants %}
+                <tbody>
+                    <tr>
+                        <td class="table-success" colspan="4" style="text-transform: uppercase;"><strong>{{apprenant.entite}}</strong></td>
+                    </tr>
+                    
+                        {% for cursus in apprenant.cursus.all %}
+                    <tr>
+                        <td>{{cursus.filiereEnCours}}</td>
+                        <td>{{cursus.annee}}</td>
+                        <td>{{cursus.note}}</td>
+                        <td>{{cursus.mention}}</td>
+                    </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4">Inscrit. Mais, aucun parcours trouvé.</td>
+                        </tr>
+                        {% endfor %}
+                </tbody>
+                {% endfor %}
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">Pas d'enregistrement</h4>
+            {% endif %}  
+    </div>
+   
+</section>
+  
+{% endblock %}

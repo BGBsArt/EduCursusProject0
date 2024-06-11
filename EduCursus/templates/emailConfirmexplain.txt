@@ -1,0 +1,12 @@
+        <!--Nous n'allons pas ecrire du html ici, la raison de 'autoescape off'-->
+{% autoescape off %}
+
+Bienvenu sur EduCursus, l'Education en marche !
+Salut {{ name }} !
+Confirmez votre adresse email en cliquant sur le lien suivant :
+
+Lien : https://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+        <!-- Le lien doit etre différent pour chaque user... On appelle donc une fonction  -->
+            <!-- 'activate' (à créer dans 'views')qui reconnait le uid et le token, elle prend deux parametres-->
+{% endautoescape %}

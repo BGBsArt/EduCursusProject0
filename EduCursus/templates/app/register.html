@@ -1,0 +1,61 @@
+{% extends "base1.html" %}
+
+{% load static %}  <!--Recharger pour les fichiers statiques-->
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5 mb-5 shadow">
+        <div class="col-lg-6 shadow p-4">
+                
+            <div class="texte text-center mt-2">
+                {% for message in messages %}
+                <strong style="color: red;">
+                    {{ message }}
+                </strong>
+                {% endfor %}
+            </div>
+
+                <h4 class="text-center">S'enregistrer</h4>
+
+                <form method="post" action="{% url 'register' %}">
+                    {% csrf_token %} <!--Protection/sécurité du formulaire-->
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Saisir entre [A-Z,a-z] et [0-9]" required> 
+                    <br>  <!--break (à la ligne)-->   <!--required (tant que ce champs n'est pas rempli, l'utilisateur ne pourra pas soumettre le formulaire)-->
+
+                    <label for="firstname">Prénom(s)</label>
+                    <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Entrez votre prénom(s)" required>
+                    <br>  <!--break-->
+
+                    <label for="lastname">Nom</label>
+                    <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Entrez votre nom" required>
+                    <br>  <!--break-->
+
+                    <label for="Email">Adresse Email</label>
+                    <input type="email" name="email" id="Email" class="form-control" placeholder="Entrez votre Adresse Email" required>
+                    <br>  <!--break-->
+
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Entrez votre mot de passe" required>
+                    <br>  <!--break-->
+
+                    <label for="password1">Confirmez le mot de passe</label>
+                    <input type="password" name="password1" id="password1" class="form-control" placeholder="Entrez le meme mot de passe" required>
+                    <br>  <!--prenom-->
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+
+                </form>
+                <p class="link text-center mt-3">Déjà inscrit ?<a href="{% url 'login' %}"> Se connecter</a></p>
+            
+        </div>
+        <div class="col-lg-6">
+            <img src="https://img.freepik.com/vecteurs-libre/groupe-etudiants-collegiaux-universitaires-
+            jeunes-gens-heureux-debout-isoles-fond-blanc_575670-66.jpg" 
+            alt="" class="img-fluid img-reponsive">
+        </div>
+    </div>
+</div>
+{% endblock %}
